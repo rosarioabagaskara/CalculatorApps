@@ -168,6 +168,5 @@
                 android:backgroundTint="@color/btnColor"
                 android:text="=" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>
