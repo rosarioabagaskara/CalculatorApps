@@ -166,7 +166,6 @@
                 android:backgroundTint="@color/btnColor"
                 android:text="@string/btnMin"
                 tools:ignore="OnClick" />
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -231,9 +230,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="2dp"
-            android:onClick="operator"
+            android:onClick="equal"
             android:backgroundTint="@color/btnColor"
             android:text="@string/btnEq"
             tools:ignore="OnClick" />
     </LinearLayout>
+
 </LinearLayout>
