@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun textInput(view: View) {
-
         if(textNull){
             if((view as Button).text == "0"){
                 textNumber?.setText((view as Button).text)
@@ -84,16 +83,82 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun minus(view: View){
-
         if(textNumber?.text?.startsWith("-") == true && !lastNumeric){
             lastMinus = true
         }
-
         if(!lastMinus) {
             textNumber?.append((view as Button).text)
             lastNumeric = false
             textNull = false
             lastMinus = true
         }
+    }
+
+    fun equal(view: View){
+       if(lastNumeric){
+           var textNumberValue = textNumber?.text.toString()
+           var tempMinus = ""
+           try{
+               if(textNumberValue.startsWith("-")){
+                   tempMinus = "-"
+                   textNumberValue = textNumberValue.substring(1)
+               }
+               if(textNumberValue.contains("-")){
+                   val splitValue = textNumberValue.split("-")
+                   var value1 = splitValue[0]
+                   var value2 = splitValue[1]
+
+                   if(tempMinus.isNotEmpty()){
+                       value1 = tempMinus + value1
+                   }
+
+                   textNumber?.text = removeDotZero((value1.toDouble() - value2.toDouble()).toString())
+               }
+               if(textNumberValue.contains("+")){
+                   val splitValue = textNumberValue.split("+")
+                   var value1 = splitValue[0]
+                   var value2 = splitValue[1]
+
+                   if(tempMinus.isNotEmpty()){
+                       value1 = tempMinus + value1
+                   }
+
+                   textNumber?.text = removeDotZero((value1.toDouble() + value2.toDouble()).toString())
+               }
+               if(textNumberValue.contains(":")){
+                   val splitValue = textNumberValue.split(":")
+                   var value1 = splitValue[0]
+                   var value2 = splitValue[1]
+
+                   if(tempMinus.isNotEmpty()){
+                       value1 = tempMinus + value1
+                   }
+
+                   textNumber?.text = removeDotZero((value1.toDouble() / value2.toDouble()).toString())
+               }
+               if(textNumberValue.contains("*")){
+                   val splitValue = textNumberValue.split("*")
+                   var value1 = splitValue[0]
+                   var value2 = splitValue[1]
+
+                   if(tempMinus.isNotEmpty()){
+                       value1 = tempMinus + value1
+                   }
+
+                   textNumber?.text = removeDotZero((value1.toDouble() * value2.toDouble()).toString())
+               }
+           }catch (e: ArithmeticException){
+               e.printStackTrace()
+           }
+       }
+    }
+
+    fun removeDotZero(result: String): String{
+        var value = result
+        if(result.contains(".0")){
+            value = result.substring(0, result.length-2)
+        }
+
+        return value
     }
 }
